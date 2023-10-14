@@ -1,0 +1,38 @@
+# dependencies
+/node_modules/
+
+# build output
+/dist/
+/build/
+
+# logs
+*.log
+npm-debug.log*
+
+# runtime data
+.pids
+*.pid
+*.seed
+*.log
+
+# directory used by some tools for cache
+.cache/
+
+# IDEs and editors
+*.swp
+*.swo
+*.bak
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables
+.env
