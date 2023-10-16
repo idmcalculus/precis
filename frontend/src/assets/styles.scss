@@ -1,4 +1,146 @@
-#rainfallChart {
-    width: 800px;
-    height: 800px;
+/* #rainfallChart {
+    background-color: rgba(0, 0, 0, 0.05);
+} */
+
+.chartBox {
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px rgba(145, 175, 241, 0.2);
+    background: white;
+}
+
+.material-icons {
+    color: rgba(16, 123, 223, 0.85);
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#noDataAlert {
+    display: none;
+}
+
+#filterForm {
+    background-color: rgba(0, 0, 0, 0.05);
+    animation: fadeIn 1s;
+    padding: 2rem;
+
+    .filterContainer {
+        background: #fff;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+
+        .form-control {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                border-color: #b0b8c1;
+            }
+
+            &:focus {
+                border-color: #495057;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .d-flex {
+            margin-bottom: 1rem; // Add more space between elements within a form-group
+
+            input {
+                flex: 1; // Ensure inputs take equal width
+
+                &:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+
+                &:last-child {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+
+    // Slider enhancements
+    #rainfall-slider {
+        .ui-slider-handle {
+            background-color: #007bff;  // Match button color
+            border: 1px solid #0056b3;  // Slightly darker border for contrast
+        }
+
+        .ui-slider-range {
+            background-color: #b0c4de;  // A neutral color for the track
+        }
+    }
+
+    // Button enhancements
+    button {
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        &:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+#statistics {
+    list-style-type: none;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: slideFromLeft 1s;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-bottom: 1px solid #e5e5e5;
+        font-size: 18px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        span.key {
+            font-weight: bold;
+            flex-basis: 50%;
+        }
+
+        span.value {
+            flex-basis: 50%;
+            text-align: right;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
