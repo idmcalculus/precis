@@ -353,8 +353,6 @@ document.getElementById("filterData").addEventListener("click", async (event) =>
 document.getElementById("clearFilters").addEventListener("click", async (event) => {
 	event.preventDefault();
 
-    // document.getElementById("startDate").value = "";
-    // document.getElementById("endDate").value = "";
 	flatpickr("#startDate").clear();
 	flatpickr("#endDate").clear();
 	document.getElementById('rainfall-slider').noUiSlider.reset();
