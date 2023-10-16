@@ -22,6 +22,50 @@
 
 ## Getting Started
 
-Further instructions on setting up the development environment, building the app, and deploying "Precis" will be added as the project progresses.
+### Backend Setup
+
+1. **Activate the virtual environment** (assuming you're using one):
+
+   ```bash
+   source venv/bin/activate  # for Unix-based systems
+   venv\Scripts\activate     # for Windows
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Start the backend server to Initialize and populate the database**:
+
+   Run the `app.py` file directly. This will create the necessary SQLite tables and populate them with data from the provided Excel file.
+
+   ```bash
+   python app.py
+   ```
+
+### Frontend Setup
+
+1. **Navigate to the frontend directory**:
+
+   ```bash
+   cd ./frontend
+   ```
+
+2. **Install frontend dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the frontend server**:
+
+   ```bash
+   npm start
+   ```
+
+Now, both the backend and frontend servers should be running. Visit the frontend URL, usually `http://localhost:3000`, in your web browser to view the application.
+
 
 Stay tuned for more updates as "Precis" continues to evolve!
