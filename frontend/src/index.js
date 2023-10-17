@@ -18,6 +18,7 @@ let rainfallChart;
 let valueCountsChart;
 let map;
 let marker;
+const baseURL = "/api"
 
 async function fetchDataAndPlot(url) {
     try {
@@ -311,7 +312,7 @@ function setupRainfallSlider(min, max) {
 // Call the functions on page load
 document.addEventListener('DOMContentLoaded', async (event) => {
 	await initMap();
-    await fetchDataAndPlot("http://127.0.0.1:5000/data");
+    await fetchDataAndPlot(`${baseURL}/data`);
 	
 	flatpickr("#startDate", {
 		enableTime: true,
@@ -346,7 +347,7 @@ document.getElementById("filterData").addEventListener("click", async (event) =>
 		queryParams.push(`specificRainfall=${minRainfall}`);
 	}
 
-    const url = `http://127.0.0.1:5000/data?${queryParams.join("&")}`;
+    const url = `${baseURL}/data?${queryParams.join("&")}`;
     await fetchDataAndPlot(url);
 });
 
@@ -360,5 +361,5 @@ document.getElementById("clearFilters").addEventListener("click", async (event) 
     // Hide the no data alert if it's showing
     document.getElementById("noDataAlert").style.display = "none";
     
-    await fetchDataAndPlot("http://127.0.0.1:5000/data");
+    await fetchDataAndPlot(`${baseURL}/data`);
 });

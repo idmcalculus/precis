@@ -7,6 +7,7 @@ from database import db
 from utils import populate_db_from_excel
 from config import DevelopmentConfig, ProductionConfig
 from dotenv import load_dotenv
+import sqlite3
 
 load_dotenv()
 
@@ -67,7 +68,16 @@ def handle_nan(value, decimal_places=4):
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
-@app.route('/data', methods=['GET'])
+@app.route('/api/exportdb', methods=['GET'])
+def exportdb():
+    con = sqlite3.connect("instance/rainfall_data.db")
+    with open("exports.sql", 'w') as f:
+        for line in con.iterdump():
+            f.write('%s\n' % line)
+    con.close()
+    return "Database exported!"
+
+@app.route('/api/data', methods=['GET'])
 def get_data():
     data_query = RainfallData.query.all()
     data_records = [entry.as_dict() for entry in data_query]  # Convert ORM objects to dictionaries
@@ -98,7 +108,7 @@ def get_data():
 
 if __name__ == '__main__':
     print('Initializing the database...')
-    
+
     engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     inspector = sa.inspect(engine)
 
