@@ -5,7 +5,7 @@ import sqlalchemy as sa
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from database import db
-from utils import populate_db_from_excel, configure_logging
+from utils import populate_db_from_excel
 from config import DevelopmentConfig, ProductionConfig
 from dotenv import load_dotenv
 
@@ -19,7 +19,6 @@ else:
     app.config.from_object(ProductionConfig)
 
 db.init_app(app)
-configure_logging(app)
 
 from models import RainfallData
 
