@@ -1,13 +1,25 @@
+import pandas as pd
+import sqlite3
+import os
+import sqlalchemy as sa
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from database import db
-import pandas as pd
-from utils import populate_db_from_excel
-from config import Config
+from utils import populate_db_from_excel, configure_logging
+from config import DevelopmentConfig, ProductionConfig
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.config.from_object(Config)
+
+if os.environ.get('FLASK_ENV') == 'development':
+    app.config.from_object(DevelopmentConfig)
+else:
+    app.config.from_object(ProductionConfig)
+
 db.init_app(app)
+configure_logging(app)
 
 from models import RainfallData
 
@@ -81,14 +93,21 @@ def get_data():
 
     return jsonify(result)
 
-""" @app.route('/dropdb', methods=['GET'])
-def dropdb():
-    db.drop_all()
-    return "Database dropped!" """
-
 if __name__ == '__main__':
-    # Run this once to create the database and populate it with data from Excel file
-    """ with app.app_context():
-        db.create_all()  # Create SQLite database and tables
-        populate_db_from_excel() # Populate database with data from Excel file """
+    engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    inspector = sa.inspect(engine)
+
+    # Check if the table exists
+    if not inspector.has_table("rainfall_data"):
+        with app.app_context():
+            db.create_all()
+            app.logger.info('Initialized the database!')
+
+    # Check if data exists in the table
+    with app.app_context():
+        if not RainfallData.query.first():  # No data in the table
+            populate_db_from_excel()  # Populate database with data from Excel file
+            app.logger.info('Populated the database from Excel!')
+
+    app.logger.info('Database already contains the rainfall_data table.')
     app.run(debug=True)
