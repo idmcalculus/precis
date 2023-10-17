@@ -1,24 +1,11 @@
-.chartBox {
-    padding: 20px;
-    border-radius: 20px;
-    border: solid 3px rgba(145, 175, 241, 0.2);
-    background: white;
-}
-
-.material-icons {
-    color: rgba(16, 123, 223, 0.85);
-    font-size: 40px;
-    font-weight: bold;
-}
-
-#noDataAlert {
-    display: none;
+.container {
+    padding: 0 1.5rem;
 }
 
 #filterForm {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: none;
     animation: fadeIn 1s;
-    padding: 2rem;
+    padding: 0;
 
     .filterContainer {
         background: #fff;
@@ -76,6 +63,38 @@
     }
 }
 
+
+.chartContainer {
+    overflow-x: auto;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;	/* IE and Edge */
+    scrollbar-width: none;		/* Firefox */
+                    
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    //
+
+    .chartBox {
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(145, 175, 241, 0.2);
+        background: white;
+        min-width: 800px;
+    }
+}
+
+.material-icons {
+    color: rgba(16, 123, 223, 0.85);
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#noDataAlert {
+    display: none;
+}
+
 #statistics {
     list-style-type: none;
     padding: 0;
@@ -125,5 +144,26 @@
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@media (min-width: 992px) {
+    #filterForm {
+        width: 50%;
+    }
+
+    #statistics {
+        width: 50%;
+    }
+}
+
+@media (min-width: 576px) {
+    #filterForm {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+    }
+
+    .chartBox {
+        width: 100%;
     }
 }

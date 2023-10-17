@@ -16,7 +16,7 @@
 			<div id="map" class="mt-5 border rounded" style="width: 100%; height: 400px;"></div>
 
 			<!-- Filters -->
-			<form id="filterForm" class="mt-5 w-50">
+			<form id="filterForm" class="mt-5">
 				<div class="border rounded p-4 my-4 filterContainer">
 					<h4 class="mb-4">Filters</h4>
 					<div class="form-group mb-3">
@@ -38,7 +38,7 @@
 				</div>
 			</form>
 
-			<div class="row col-12 my-5">
+			<div class="col-12 my-5">
 				<!-- Loader -->
 				<div id="loader" class="text-center mt-5" style="display: none;">
 					<div class="spinner-border text-primary" role="status">
@@ -53,20 +53,28 @@
 				</div>
 
 				<!-- Chart -->	
-				<div class="row mt-5">
+				<div class="mt-5 chartContainer">
 					<div class="col-12 chartBox">
-						<canvas id="rainfallChart"></canvas>
+						<canvas id="rainfallChart" class="mt-4"></canvas>
 					</div>
 				</div>
 				
-				<!-- Statistics -->
-				<div class="row mt-5">
+				<!-- Statistical Analysis -->
+				<div class="mt-5">
 					<div class="col-12">
 						<h3>Rainfall Statistics for Central Birmingham:</h3>
 						<h6><em>Period from <span id="fromDate"></span> to <span id="toDate"></span></em></h6>
 						<h4 class="my-4">Total number of rainfall values: <span id="totalCount"></span></h4>
-						<canvas id="valueCountsChart" class="mt-4 w-100"></canvas>
-						<ul id="statistics" class="mt-4 w-50"></ul>
+
+						<!-- Bar Chart -->
+						<div class="mt-5 chartContainer">
+							<div class="col-12 chartBox">
+								<canvas id="valueCountsChart" class="mt-4"></canvas>
+							</div>
+						</div>
+
+						<!-- Statical Measures-->
+						<ul id="statistics" class="card mt-4"></ul>
 					</div>
 				</div>
 			</div>

@@ -76,7 +76,7 @@ def create_app():
         value_counts = df['RG_A'].value_counts().to_dict() # Get unique value counts
 
         result = {
-            "data": data_records,
+            "data": df.to_dict(orient='records'),
             "statistics": statistics,
             "value_counts": value_counts
         }
