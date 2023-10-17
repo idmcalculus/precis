@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 import os
 import sqlalchemy as sa
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, send_from_directory
 from flask_cors import CORS
 from database import db
 from utils import populate_db_from_excel
@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./static')
 
 if os.environ.get('FLASK_ENV') == 'development':
     app.config.from_object(DevelopmentConfig)
@@ -63,6 +63,11 @@ def handle_nan(value, decimal_places=4):
     """Returns None if the value is NaN, otherwise returns the value itself."""
     return round(value, decimal_places) if pd.notna(value) else None
 
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory(app.static_folder, path)
+
 @app.route('/data', methods=['GET'])
 def get_data():
     data_query = RainfallData.query.all()
@@ -100,13 +105,13 @@ if __name__ == '__main__':
     if not inspector.has_table("rainfall_data"):
         with app.app_context():
             db.create_all()
-            app.logger.info('Initialized the database!')
+            print('Initialized the database!')
 
     # Check if data exists in the table
     with app.app_context():
         if not RainfallData.query.first():  # No data in the table
             populate_db_from_excel()  # Populate database with data from Excel file
-            app.logger.info('Populated the database from Excel!')
+            print('Populated the database from Excel!')
 
-    app.logger.info('Database already contains the rainfall_data table.')
+    print('Database already contains the rainfall_data table.')
     app.run(debug=True)
