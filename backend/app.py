@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 import os
 import sqlalchemy as sa
 from flask import Flask, jsonify, request, abort, send_from_directory
@@ -98,8 +97,14 @@ def get_data():
     return jsonify(result)
 
 if __name__ == '__main__':
+    print('Initializing the database...')
+    
     engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     inspector = sa.inspect(engine)
+
+    print(app.config['SQLALCHEMY_DATABASE_URI'])
+    print('Checking if the database already contains the rainfall_data table...')
+    print(inspector.has_table("rainfall_data"))
 
     # Check if the table exists
     if not inspector.has_table("rainfall_data"):
@@ -114,4 +119,4 @@ if __name__ == '__main__':
             print('Populated the database from Excel!')
 
     print('Database already contains the rainfall_data table.')
-    app.run(debug=True)
+    app.run()
