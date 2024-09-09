@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import request, abort
+from flask import request
 
 
 def load_data_from_excel():
