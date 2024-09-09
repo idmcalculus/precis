@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import './assets/styles.scss';
 
+let marker;
 let map;
 const baseURL = "/api"
 
