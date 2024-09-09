@@ -32,7 +32,6 @@
     "bootstrap": "^5.3.3",
     "flatpickr": "^4.6.13",
     "leaflet": "^1.9.4",
-    "nouislider": "^15.8.1",
-    "plotly.js-dist": "^2.35.0"
+    "nouislider": "^15.8.1"
   }
 }

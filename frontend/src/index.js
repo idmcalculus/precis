@@ -2,7 +2,7 @@ import axios from 'axios';
 import L from 'leaflet';
 import noUiSlider from 'nouislider';
 import flatpickr from "flatpickr";
-import Plotly from 'plotly.js-dist';
+import Plotly from 'plotly';
 
 import 'bootstrap';
 import 'nouislider/dist/nouislider.css';
@@ -44,8 +44,8 @@ function displayLoader(show) {
 async function plotData(data) {
     const { scatter_chart, bar_chart, statistics } = data;
 
-    displayRainfallChart(JSON.parse(scatter_chart));
-    displayValueCountsBarChart(JSON.parse(bar_chart));
+    await displayRainfallChart(JSON.parse(scatter_chart));
+    await displayValueCountsBarChart(JSON.parse(bar_chart));
     displayStatistics(statistics);
 }
 
@@ -74,7 +74,7 @@ function displayStatistics(statistics) {
     setupRainfallSlider(lowest, highest);
 }
 
-function displayRainfallChart(figure) {
+async function displayRainfallChart(figure) {
 	try {
 		Plotly.newPlot('rainfallChart', figure.data, figure.layout);
 	} catch (error) {
@@ -82,7 +82,7 @@ function displayRainfallChart(figure) {
 	}
 }
 
-function displayValueCountsBarChart(figure) {
+async function displayValueCountsBarChart(figure) {
 	try {
 		Plotly.newPlot('valueCountsChart', figure.data, figure.layout);
 	} catch (error) {
