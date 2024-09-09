@@ -1,15 +1,10 @@
 import pandas as pd
 from flask import request, abort
-from database import db
-from models import RainfallData
 
-def populate_db_from_excel():
+
+def load_data_from_excel():
     DATA_PATH = "./data/Data.xlsx"
-    df = pd.read_excel(DATA_PATH)
-    for index, row in df.iterrows():
-        record = RainfallData(time=row['time'], RG_A=row['RG_A'])
-        db.session.add(record)
-        db.session.commit()
+    return pd.read_excel(DATA_PATH)
 
 def filter_data(df):
     """Applies various filters to the dataframe based on the request arguments."""
