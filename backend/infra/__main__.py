@@ -293,7 +293,7 @@ service = aws.ecs.Service("precis-dev-service",
     }],
     opts=pulumi.ResourceOptions(depends_on=[listener]))
 
-# Export the load balancer URL
+# Export the load balancer URL to access app
 pulumi.export("url", alb.dns_name)
 
 # Export the database url
