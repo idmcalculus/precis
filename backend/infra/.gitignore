@@ -1,0 +1,13 @@
+# Pulumi specific
+.pulumi/
+Pulumi.*.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# AWS
+.aws/

@@ -1,0 +1,13 @@
+name: precis
+description: Precis - Flask Rainfall App ECS deployment
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-python
+      pulumi:project: precis
+      pulumi:stack: dev
